@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='item.proto',
   package='',
-  serialized_pb=_b('\n\nitem.proto\"G\n\x04Item\x12\r\n\x05title\x18\x10 \x01(\t\x12\r\n\x05price\x18\x11 \x01(\r\x12\x10\n\x08num_sell\x18\x12 \x01(\r\x12\x0f\n\x07img_url\x18\x13 \x01(\t')
+  serialized_pb=_b('\n\nitem.proto\"Y\n\x04Item\x12\r\n\x05title\x18\x10 \x01(\t\x12\r\n\x05price\x18\x11 \x01(\t\x12\x10\n\x08num_sell\x18\x12 \x01(\t\x12\x0f\n\x07img_url\x18\x13 \x01(\t\x12\x10\n\x08item_url\x18\x14 \x01(\t')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -41,21 +41,28 @@ _ITEM = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='price', full_name='Item.price', index=1,
-      number=17, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='num_sell', full_name='Item.num_sell', index=2,
-      number=18, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      number=18, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='img_url', full_name='Item.img_url', index=3,
       number=19, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='item_url', full_name='Item.item_url', index=4,
+      number=20, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -72,7 +79,7 @@ _ITEM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=85,
+  serialized_end=103,
 )
 
 DESCRIPTOR.message_types_by_name['Item'] = _ITEM

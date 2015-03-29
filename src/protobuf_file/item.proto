@@ -4,9 +4,10 @@
 message Item
 {
 	optional string title = 16;
-	optional uint32 price = 17;
-	optional uint32 num_sell = 18;
+	optional string price = 17;
+	optional string num_sell = 18;
 	optional string img_url = 19;
+	optional string item_url = 20;
 }
 
 
