@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/crawler/JD.py=utf-8
+encoding//src/crawler/TaoBao.py=utf-8
+encoding//src/crawler/Tmall.py=utf-8
+encoding//src/crawler/crawl.py=utf-8
 encoding//src/http_server/server.py=utf-8
+encoding//src/protobuf_file/test_item.py=utf-8

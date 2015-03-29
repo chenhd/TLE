@@ -1,11 +1,19 @@
 # coding:utf-8
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import urllib2
+from crawler import crawl
 
 
 
 def search(args):
+#     ['search', 'selenium+%E4%B9%A6']
+    print 'searching args:', args
     
-    return 'search data ' + args
+    search_data = urllib2.unquote(args)
+    print 'searching data:', search_data
+    crawl(search_data)
+    
+    return 'searching ...', search_data
 
 def result(args):
     
@@ -50,7 +58,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             if request_path[0] in dic_method:
                 data = dic_method[request_path[0]](request_path[1])
         else:
-            data = 'index'
+            data = open('./index.html').read()
         
         
         
