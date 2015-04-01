@@ -1,8 +1,10 @@
 # coding:utf-8
+import time
+
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-
-
+from protobuf_file.item_pb2 import Item
 
 
 def crawl(search_data):
@@ -22,15 +24,39 @@ def crawl(search_data):
     
     for i in range(num_page):
         browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*i+1))
+        
+#         js="var q=document.documentElement.scrollTop=10000"
+#         browser.execute_script(js)
+#         time.sleep(3)
+
+#         browser.maximize_window()
+#         time.sleep(2)
+
+#         browser.set_window_size(3200, 3200) 
+#         time.sleep(3)
+
 #         print i
         element = browser.find_element_by_xpath('/html/body[@class=\'root61\']')
         element = element.find_element_by_xpath('./div[@class=\'w main\']')
         element = element.find_element_by_xpath('./div[@class=\'right-extra\']')
         element = element.find_element_by_xpath('./div[@class=\'m psearch \']')
+        element = element.find_element_by_xpath('./ul')
         
+        list_item = element.find_elements(by=By.XPATH, value='./li')
         
-        
-
+        for item in list_item:
+            obj = Item()
+            
+            row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+            row0_element = row0_element.find_element_by_xpath('./a')
+            obj.item_url = row0_element.get_attribute('href')
+            row0_element = row0_element.find_element_by_xpath('./img')
+            obj.img_url = row0_element.get_attribute('src')
+            
+            row1_element = item.find_element_by_xpath('./div[@class=\'p-name\']')
+            obj.title = row1_element.text
+            
+            print obj
 
 
 
