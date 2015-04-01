@@ -1,12 +1,12 @@
 # coding:utf-8
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
+# import time
 from protobuf_file.item_pb2 import Item
 
 
-# search_data : selenium%CA%E9
 def crawl(search_data):
+# search_data : selenium%CA%E9
     print search_data
     
     browser = webdriver.Chrome()
@@ -18,12 +18,12 @@ def crawl(search_data):
 #     print len(element.text)
     num_page = int(element.text[2:-3])
     print type(num_page), num_page, range(num_page)
-#     一页有44个物品，第一页48？
     element = None
     
 
     
     for i in range(num_page):
+#     一页有44个物品，第一页48？
         browser.get('http://s.taobao.com/search?q=' + search_data + '&s=' + str(i*44) + '&sort=price-asc')
         
         element = browser.find_element_by_xpath('/html/body')
@@ -55,10 +55,10 @@ def crawl(search_data):
             obj.num_sell = row1_element.find_element_by_xpath('./div[@class=\'deal-cnt\']').text[:-3]
 
 
-
+            
             print obj
                 
-#             break
+            break
         break
 
 

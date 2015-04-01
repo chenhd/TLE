@@ -1,7 +1,7 @@
 # coding:utf-8
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import urllib2
-from crawler import crawl
+from crawler.crawl import crawl
 
 
 
