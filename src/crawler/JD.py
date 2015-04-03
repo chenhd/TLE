@@ -67,12 +67,19 @@ def crawl(search_data):
             row1_element = item.find_element_by_xpath('./div[@class=\'p-name\']')
             obj.title = row1_element.text
             
+            row3_element = item.find_element_by_xpath('./div[@class=\'p-price\']')
+            obj.price = row3_element.find_element_by_xpath('./strong').text[1:]
+            
+            
+            
+            row8_element = item.find_element_by_xpath('./div[@class=\'extra\']')
+            obj.num_sell = row8_element.find_element_by_xpath('./a').text[3:-3]
             
             
             print obj
-        
-#         break
+            
         print '*' * 90
+        break
 
 
 
