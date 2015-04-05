@@ -11,6 +11,8 @@ def crawl(search_data):
 # search_data : selenium%CA%E9
     print search_data
     
+    list_obj = []
+    
     browser = webdriver.Chrome()
     browser.get('http://list.tmall.com/search_product.htm?q=' + search_data)
     
@@ -58,16 +60,16 @@ def crawl(search_data):
             row4_element = item.find_element_by_xpath('./p[@class=\'productStatus\']')
             obj.num_sell = row4_element.find_element_by_xpath('./span/em').text[:-1]
             
+            list_obj.append(obj)
             print obj
             
-            
-            break
+#             break
         break
         
 
     browser.close()
 
-
+    return list_obj
 
 
 if __name__ == '__main__':

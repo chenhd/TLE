@@ -11,6 +11,8 @@ from protobuf_file.item_pb2 import Item
 def crawl(search_data):
     print search_data
     
+    list_obj = []
+    
     browser = webdriver.Chrome()
     browser.get('http://search.jd.com/Search?keyword=' + search_data)
     
@@ -75,19 +77,20 @@ def crawl(search_data):
             row8_element = item.find_element_by_xpath('./div[@class=\'extra\']')
             obj.num_sell = row8_element.find_element_by_xpath('./a').text[3:-3]
             
-            
+            list_obj.append(obj)
             print obj
-            
-        print '*' * 90
+#             break
+#         print '*' * 90
         break
 
 
 
 
     browser.close()
-    print 'over'
+    
+    return list_obj
 
-
+    
 
 if __name__ == '__main__':
 # jd_search_data = search_data + '&enc=utf-8'

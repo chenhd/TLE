@@ -13,7 +13,7 @@ def search(args):
     print 'searching data:', search_data
     crawl(search_data)
     
-    return 'searching ...', search_data
+    return 'on searching ...', search_data, '\n', 'please wait'
 
 def result(args):
     

@@ -9,6 +9,8 @@ def crawl(search_data):
 # search_data : selenium%CA%E9
     print search_data
     
+    list_obj = []
+    
     browser = webdriver.Chrome()
     browser.get('http://s.taobao.com/search?q=' + search_data)
     
@@ -55,10 +57,10 @@ def crawl(search_data):
             obj.num_sell = row1_element.find_element_by_xpath('./div[@class=\'deal-cnt\']').text[:-3]
 
 
-            
+            list_obj.append(obj)
             print obj
                 
-            break
+#             break
         break
 
 
@@ -68,6 +70,8 @@ def crawl(search_data):
 
     browser.close()
 #     browser.quit()
+
+    return list_obj
 
 
 if __name__ == '__main__':
