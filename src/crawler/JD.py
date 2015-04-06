@@ -28,7 +28,7 @@ def crawl(search_data):
 #     print element.text[3:-7]
 #     print len(element.text)
     num_page = int(element.text[3:-7])
-    print type(num_page), num_page, range(num_page)
+#     print type(num_page), num_page, range(num_page)
     element = None
     
     for i in range(num_page):
@@ -52,12 +52,12 @@ def crawl(search_data):
         time.sleep(1)
         list_item = element.find_elements(by=By.XPATH, value='./li')
         
-        print 'len : ' + str(len(list_item))
+#         print 'len : ' + str(len(list_item))
         for i in range(len(list_item)):
             
             item = list_item[i]
             item.click()
-            print i
+#             print i
             obj = Item()
             
             row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')

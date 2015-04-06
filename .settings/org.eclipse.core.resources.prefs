@@ -4,6 +4,7 @@ encoding//src/crawler/TaoBao.py=utf-8
 encoding//src/crawler/Tmall.py=utf-8
 encoding//src/crawler/crawl.py=utf-8
 encoding//src/http_server/server.py=utf-8
+encoding//src/page/generate_page.py=utf-8
 encoding//src/test/httpServer.py=utf-8
 encoding//src/test/test_hash_method.py=utf-8
 encoding//src/test/test_item.py=utf-8

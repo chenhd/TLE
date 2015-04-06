@@ -19,7 +19,7 @@ def crawl(search_data):
 #     print element.text
 #     print len(element.text)
     num_page = int(element.text[2:-3])
-    print type(num_page), num_page, range(num_page)
+#     print type(num_page), num_page, range(num_page)
     element = None
     
 
@@ -38,8 +38,8 @@ def crawl(search_data):
         
         list_item = element.find_elements(by=By.XPATH, value='./div[@class=\'item  \']')
         
-        print list_item[0].text
-        print 
+#         print list_item[0].text
+#         print 
         for item in list_item:
             obj = Item()
             

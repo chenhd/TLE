@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+	<table>
+	{% for item in list_item %}
+		<tr>
+		<td><a href="{{ item.item_url}}" target="_top">
+			<img src="{{ item.img_url }}"  height="200" width="200" >
+		</a></td>
+		<td>
+			<table>
+				<tr>{{ item.title }}</tr>
+				<tr>
+					<td>销量：{{ item.num_sell }}</td>
+					<td>价格：{{ item.price }}</td>
+				</tr>
+			</table>
+		</td>
+		</tr>
+	{% endfor %}
+	</table>
+  </body>
+</html>

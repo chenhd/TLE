@@ -2,6 +2,7 @@
 import re
 
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
 from protobuf_file.item_pb2 import Item
@@ -30,6 +31,7 @@ def crawl(search_data):
 #     一页有60个物品
         browser.get('http://list.tmall.com/search_product.htm?q=' + search_data + '&s=' + str(i*60) + '&sort=p')
         
+        
         element = browser.find_element_by_xpath('/html/body[@class=\'pg\']')
         element = element.find_element_by_xpath('./div[@class=\'page\']')
         element = element.find_element_by_xpath('./div[@id=\'mallPage\']')
@@ -43,6 +45,7 @@ def crawl(search_data):
             obj = Item()
             
 #             print item.get_attribute('outerHTML')
+            ActionChains(browser).context_click(item).perform()
             
             item = item.find_element_by_xpath('./div[@class=\'product-iWrap\']')
             row0_element = item.find_element_by_xpath('./div[@class=\'productImg-wrap\']')
@@ -73,5 +76,5 @@ def crawl(search_data):
 
 
 if __name__ == '__main__':
-#     crawl('selenium%CA%E9')
-    crawl('%CA%E9')
+    crawl('selenium%CA%E9')
+#     crawl('%CA%E9')
