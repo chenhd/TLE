@@ -26,7 +26,7 @@ def crawl(search_data):
     
     for i in range(num_page):
 #     一页有44个物品，第一页48？
-        browser.get('http://s.taobao.com/search?q=' + search_data + '&s=' + str(i*44) + '&sort=price-asc')
+        browser.get('http://s.taobao.com/search?q=' + search_data + '&s=' + str(i*44) + '&sort=price-asc' + '&style=grid')
         
         element = browser.find_element_by_xpath('/html/body')
         element = element.find_element_by_xpath('./div[@id=\'page\']')

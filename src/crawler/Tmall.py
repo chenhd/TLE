@@ -17,12 +17,13 @@ def crawl(search_data):
     browser = webdriver.Chrome()
     browser.get('http://list.tmall.com/search_product.htm?q=' + search_data)
     
-    element = browser.find_element_by_xpath('/html/body/div[@class=\'page\']/div[@id=\'mallPage\']/div[@id=\'content\']/div[@class=\'main       \']/div[@class=\'ui-page\']/div[@class=\'ui-page-wrap\']/b[@class=\'ui-page-skip\']/form[@name=\'filterPageForm\']')
+    element = browser.find_element_by_xpath('/html/body/div[@class=\'page\']/div[@id=\'mallPage\']/div[@id=\'content\']/div/div[@class=\'ui-page\']/div[@class=\'ui-page-wrap\']/b[@class=\'ui-page-skip\']/form[@name=\'filterPageForm\']')
     
 #     print element.get_attribute('outerHTML')
 #     print type(element.text), len(element.text)
 #     print element.text[1:-8]
     num_page = int(element.text[1:-8])
+    print num_page
     element = None
     
     
@@ -32,14 +33,14 @@ def crawl(search_data):
         browser.get('http://list.tmall.com/search_product.htm?q=' + search_data + '&s=' + str(i*60) + '&sort=p')
         
         
-        element = browser.find_element_by_xpath('/html/body[@class=\'pg\']')
-        element = element.find_element_by_xpath('./div[@class=\'page\']')
-        element = element.find_element_by_xpath('./div[@id=\'mallPage\']')
-        element = element.find_element_by_xpath('./div[@id=\'content\']')
-        element = element.find_element_by_xpath('./div[@class=\'main       \']')
-        element = element.find_element_by_xpath('./div[@id=\'J_ItemList\']')
+#         element = browser.find_element_by_xpath('/html/body[@class=\'pg\']')
+#         element = element.find_element_by_xpath('./div[@class=\'page\']')
+#         element = element.find_element_by_xpath('./div[@id=\'mallPage\']')
+#         element = element.find_element_by_xpath('./div[@id=\'content\']')
+#         element = element.find_elements_by_xpath('./div[@class=\'main       \']')
+#         element = element.find_element_by_xpath('./div[@id=\'J_ItemList\']')
         
-        list_item = element.find_elements(by=By.XPATH, value='./div[@class=\'product\']')
+        list_item = browser.find_elements(by=By.CLASS_NAME, value='product')
         
         for item in list_item:
             obj = Item()
@@ -55,6 +56,8 @@ def crawl(search_data):
 
             row1_element = item.find_element_by_xpath('./p[@class=\'productPrice\']')
             obj.price = row1_element.find_element_by_xpath('./em').get_attribute('title')
+            
+            print obj
             
             row2_element = item.find_element_by_xpath('./p[@class=\'productTitle\']')
             obj.title = row2_element.find_element_by_xpath('./a').get_attribute('title')
@@ -76,5 +79,6 @@ def crawl(search_data):
 
 
 if __name__ == '__main__':
-    crawl('selenium%CA%E9')
+#     crawl('selenium%CA%E9')
 #     crawl('%CA%E9')
+    crawl('food')

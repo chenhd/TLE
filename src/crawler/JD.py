@@ -2,6 +2,7 @@
 import time
 
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -34,8 +35,9 @@ def crawl(search_data):
     for i in range(num_page):
         browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*i+1))
         
-        browser.find_element_by_class_name('jumpto').click()
-    
+        
+        ActionChains(browser).context_click(browser.find_element_by_class_name('jumpto')).perform()
+        
         element = browser.find_element_by_xpath('/html/body[@class=\'root61\']/div[@class=\'w main\']/div[@class=\'right-extra\']/div[@class=\'m clearfix\']/div[@class=\'pagin fr\']/span[@class=\'page-skip\']/em')
     
         
@@ -43,12 +45,13 @@ def crawl(search_data):
         element = browser.find_element_by_xpath('/html/body[@class=\'root61\']')
         element = element.find_element_by_xpath('./div[@class=\'w main\']')
         element = element.find_element_by_xpath('./div[@class=\'right-extra\']')
-        element = element.find_element_by_xpath('./div[@class=\'m psearch \']')
+        element = element.find_element_by_xpath('./div[@id=\'plist\']')
         element = element.find_element_by_xpath('./ul')
         
         list_item = element.find_elements(by=By.XPATH, value='./li')
         
-        list_item[29].click()
+        
+        ActionChains(browser).context_click(list_item[29]).perform()
         time.sleep(1)
         list_item = element.find_elements(by=By.XPATH, value='./li')
         
@@ -56,11 +59,14 @@ def crawl(search_data):
         for i in range(len(list_item)):
             
             item = list_item[i]
-            item.click()
+            ActionChains(browser).context_click(item).perform()
 #             print i
             obj = Item()
-            
-            row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+            try:
+                row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+            except:
+                item = item.find_element_by_xpath('./div')
+                row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
             row0_element = row0_element.find_element_by_xpath('./a')
             obj.item_url = row0_element.get_attribute('href')
             row0_element = row0_element.find_element_by_xpath('./img')
