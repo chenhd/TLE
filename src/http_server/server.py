@@ -64,7 +64,11 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             if request_path[0] in dic_method:
                 data = dic_method[request_path[0]](request_path[1])
         elif m:
-            data = open('./'+m.group()).read()
+            try:
+                data = open('./'+m.group()).read()
+            except:
+                data = None
+                pass
         else:
             data = open('./index.html').read()
         

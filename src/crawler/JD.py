@@ -15,7 +15,7 @@ def crawl(search_data):
     list_obj = []
     
     browser = webdriver.Chrome()
-    browser.get('http://search.jd.com/Search?keyword=' + search_data)
+    browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*0+1))
     
 #     browser.find_element_by_class_name('jumpto').click()
     
@@ -30,13 +30,12 @@ def crawl(search_data):
 #     print len(element.text)
     num_page = int(element.text[3:-7])
 #     print type(num_page), num_page, range(num_page)
-    element = None
+    element = ''
     
     for i in range(num_page):
         browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*i+1))
         
         
-        ActionChains(browser).context_click(browser.find_element_by_class_name('jumpto')).perform()
         
         element = browser.find_element_by_xpath('/html/body[@class=\'root61\']/div[@class=\'w main\']/div[@class=\'right-extra\']/div[@class=\'m clearfix\']/div[@class=\'pagin fr\']/span[@class=\'page-skip\']/em')
     

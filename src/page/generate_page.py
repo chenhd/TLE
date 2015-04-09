@@ -72,9 +72,18 @@ def jd_generate(search_data):
     file.close()
 
 def generate(search_data):
-    tb_generate(search_data)
-    tm_generate(search_data)
-    jd_generate(search_data)
+    try:
+        tb_generate(search_data)
+    except:
+        pass
+    try:
+        tm_generate(search_data)
+    except:
+        pass
+    try:
+        jd_generate(search_data)
+    except:
+        pass
 
     tmpl = Template(open('./all_template.html').read())
 

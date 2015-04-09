@@ -12,7 +12,7 @@ def crawl(search_data):
     list_obj = []
     
     browser = webdriver.Chrome()
-    browser.get('http://s.taobao.com/search?q=' + search_data)
+    browser.get('http://s.taobao.com/search?q=' + search_data + '&s=' + str(0*44) + '&sort=price-asc' + '&style=grid')
     
     element = browser.find_element_by_xpath('/html/body/div[@id=\'page\']/div[@id=\'main\']/div[@class=\'grid-total\']/div[@class=\'grid-left\']/div[@id=\'mainsrp-pager\']/div[@class=\'m-page g-clearfix\']/div[@class=\'wraper\']/div[@class=\'inner clearfix\']/div[@class=\'total\']')
 #     print element.get_attribute('outerHTML')
