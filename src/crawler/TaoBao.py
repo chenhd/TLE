@@ -1,10 +1,13 @@
 # coding:utf-8
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-# import time
+
 from protobuf_file.item_pb2 import Item
 
 
+# import time
 def crawl(search_data):
 # search_data : selenium%CA%E9
     print search_data
@@ -13,7 +16,7 @@ def crawl(search_data):
     
     browser = webdriver.Chrome()
     browser.get('http://s.taobao.com/search?q=' + search_data + '&s=' + str(0*44) + '&sort=price-asc' + '&style=grid')
-    
+    time.sleep(3)
     element = browser.find_element_by_xpath('/html/body/div[@id=\'page\']/div[@id=\'main\']/div[@class=\'grid-total\']/div[@class=\'grid-left\']/div[@id=\'mainsrp-pager\']/div[@class=\'m-page g-clearfix\']/div[@class=\'wraper\']/div[@class=\'inner clearfix\']/div[@class=\'total\']')
 #     print element.get_attribute('outerHTML')
 #     print element.text

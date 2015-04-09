@@ -16,11 +16,14 @@ def crawl(search_data):
     
     browser = webdriver.Chrome()
     browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*0+1))
+    time.sleep(3)
     
 #     browser.find_element_by_class_name('jumpto').click()
-    
-    element = browser.find_element_by_xpath('/html/body[@class=\'root61\']/div[@class=\'w main\']/div[@class=\'right-extra\']/div[@class=\'m clearfix\']/div[@class=\'pagin fr\']/span[@class=\'page-skip\']/em')
-    
+    try:
+        element = browser.find_element_by_xpath('/html/body[@class=\'root61\']/div[@class=\'w main\']/div[@class=\'right-extra\']/div[@class=\'m clearfix\']/div[@class=\'pagin fr\']/span[@class=\'page-skip\']/em')
+        num_page = int(element.text[3:-7])
+    except:
+        num_page = 1
     
     
     
@@ -28,17 +31,11 @@ def crawl(search_data):
 #     print repr(element.text)
 #     print element.text[3:-7]
 #     print len(element.text)
-    num_page = int(element.text[3:-7])
 #     print type(num_page), num_page, range(num_page)
     element = ''
     
     for i in range(num_page):
         browser.get('http://search.jd.com/Search?keyword=' + search_data + '&psort=4' + '&page=' + str(2*i+1))
-        
-        
-        
-        element = browser.find_element_by_xpath('/html/body[@class=\'root61\']/div[@class=\'w main\']/div[@class=\'right-extra\']/div[@class=\'m clearfix\']/div[@class=\'pagin fr\']/span[@class=\'page-skip\']/em')
-    
         
 
         element = browser.find_element_by_xpath('/html/body[@class=\'root61\']')
@@ -56,34 +53,36 @@ def crawl(search_data):
         
 #         print 'len : ' + str(len(list_item))
         for i in range(len(list_item)):
-            
-            item = list_item[i]
-            ActionChains(browser).context_click(item).perform()
-#             print i
-            obj = Item()
             try:
-                row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+                item = list_item[i]
+                ActionChains(browser).context_click(item).perform()
+    #             print i
+                obj = Item()
+                try:
+                    row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+                except:
+                    item = item.find_element_by_xpath('./div')
+                    row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
+                row0_element = row0_element.find_element_by_xpath('./a')
+                obj.item_url = row0_element.get_attribute('href')
+                row0_element = row0_element.find_element_by_xpath('./img')
+                obj.img_url = row0_element.get_attribute('src')
+                 
+                row1_element = item.find_element_by_xpath('./div[@class=\'p-name\']')
+                obj.title = row1_element.text
+                
+                row3_element = item.find_element_by_xpath('./div[@class=\'p-price\']')
+                obj.price = row3_element.find_element_by_xpath('./strong').text[1:]
+                
+                
+                
+                row8_element = item.find_element_by_xpath('./div[@class=\'extra\']')
+                obj.num_sell = row8_element.find_element_by_xpath('./a').text[3:-3]
+                
+                list_obj.append(obj)
+                print obj
             except:
-                item = item.find_element_by_xpath('./div')
-                row0_element = item.find_element_by_xpath('./div[@class=\'p-img\']')
-            row0_element = row0_element.find_element_by_xpath('./a')
-            obj.item_url = row0_element.get_attribute('href')
-            row0_element = row0_element.find_element_by_xpath('./img')
-            obj.img_url = row0_element.get_attribute('src')
-             
-            row1_element = item.find_element_by_xpath('./div[@class=\'p-name\']')
-            obj.title = row1_element.text
-            
-            row3_element = item.find_element_by_xpath('./div[@class=\'p-price\']')
-            obj.price = row3_element.find_element_by_xpath('./strong').text[1:]
-            
-            
-            
-            row8_element = item.find_element_by_xpath('./div[@class=\'extra\']')
-            obj.num_sell = row8_element.find_element_by_xpath('./a').text[3:-3]
-            
-            list_obj.append(obj)
-            print obj
+                pass
 #             break
 #         print '*' * 90
         break

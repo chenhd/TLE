@@ -67,7 +67,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             try:
                 data = open('./'+m.group()).read()
             except:
-                data = None
+                data = ''
                 pass
         else:
             data = open('./index.html').read()

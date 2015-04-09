@@ -1,5 +1,6 @@
 # coding:utf-8
 import re
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -18,7 +19,7 @@ def crawl(search_data):
     browser.get('http://list.tmall.com/search_product.htm?q=' + search_data + '&s=' + str(0*60) + '&sort=p')
     
     element = browser.find_element_by_xpath('/html/body/div[@class=\'page\']/div[@id=\'mallPage\']/div[@id=\'content\']/div/div[@class=\'ui-page\']/div[@class=\'ui-page-wrap\']/b[@class=\'ui-page-skip\']/form[@name=\'filterPageForm\']')
-    
+    time.sleep(3)
 #     print element.get_attribute('outerHTML')
 #     print type(element.text), len(element.text)
 #     print element.text[1:-8]
@@ -59,9 +60,11 @@ def crawl(search_data):
                 obj.price = row1_element.find_element_by_xpath('./em').get_attribute('title')
                 
     #             print obj
-                
-    #             row2_element = item.find_element_by_xpath('./p[@class=\'productTitle\']')
-                row2_element = item.find_elements_by_xpath('./div')[1]
+                try:
+                    row2_element = item.find_element_by_xpath('./p[@class=\'productTitle\']')
+                except:
+                    row2_element = item.find_elements_by_xpath('./div')[1]
+#                 row2_element = item.find_elements_by_xpath('./div')[1]
                 obj.title = row2_element.find_element_by_xpath('./a').get_attribute('title')
                 obj.title = re.sub('&.*;', '', obj.title)
                 
