@@ -18,10 +18,13 @@ def tb_generate(search_data):
     file = open('../data/tb_' + file_name, 'r')
     list_item = []
     for line in file:
-        pb_string = line.strip('\n')
-        item = Item()
-        item.ParseFromString(pb_string)
-        list_item.append(item)
+        try:
+            pb_string = line.strip('\n')
+            item = Item()
+            item.ParseFromString(pb_string)
+            list_item.append(item)
+        except Exception as e:
+            print e
         
     tmpl = Template(open('./item_template.html').read())
 
@@ -38,10 +41,13 @@ def tm_generate(search_data):
     file = open('../data/tm_' + file_name, 'r')
     list_item = []
     for line in file:
-        pb_string = line.strip('\n')
-        item = Item()
-        item.ParseFromString(pb_string)
-        list_item.append(item)
+        try:
+            pb_string = line.strip('\n')
+            item = Item()
+            item.ParseFromString(pb_string)
+            list_item.append(item)
+        except Exception as e:
+            print e
         
     tmpl = Template(open('./item_template.html').read())
 
@@ -58,10 +64,13 @@ def jd_generate(search_data):
     file = open('../data/jd_' + file_name, 'r')
     list_item = []
     for line in file:
-        pb_string = line.strip('\n')
-        item = Item()
-        item.ParseFromString(pb_string)
-        list_item.append(item)
+        try:
+            pb_string = line.strip('\n')
+            item = Item()
+            item.ParseFromString(pb_string)
+            list_item.append(item)
+        except Exception as e:
+            print e
         
     tmpl = Template(open('./item_template.html').read())
 
@@ -74,7 +83,8 @@ def jd_generate(search_data):
 def generate(search_data):
     try:
         tb_generate(search_data)
-    except:
+    except Exception as e:
+        print e
         pass
     try:
         tm_generate(search_data)

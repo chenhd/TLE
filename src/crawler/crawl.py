@@ -21,16 +21,18 @@ def crawl(search_data):
     tb_search_data = urllib2.quote(search_data.decode('UTF-8').encode('GBK'))
     tb_list_obj = TaoBao.crawl(tb_search_data)
     store(tb_list_obj, '../data/tb_' + file_name)
+    print 'len(tb_list_obj)',len(tb_list_obj)
     
-    
-    tm_search_data = tb_search_data
+    tm_search_data = urllib2.quote(search_data.decode('UTF-8').encode('GBK'))
     tm_list_obj = Tmall.crawl(tm_search_data)
     store(tm_list_obj, '../data/tm_' + file_name)
+    print 'len(tm_list_obj)', len(tm_list_obj)
 
     jd_search_data = search_data + '&enc=utf-8'
     jd_list_obj = JD.crawl(jd_search_data)
     store(jd_list_obj, '../data/jd_' + file_name)
-
+    print 'len(jd_list_obj)', len(jd_list_obj)
+     
 #     print tb_list_obj[0], tm_list_obj[0], jd_list_obj[0]
     
 

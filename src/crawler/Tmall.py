@@ -59,11 +59,11 @@ def crawl(search_data):
                 row1_element = item.find_element_by_xpath('./p[@class=\'productPrice\']')
                 obj.price = row1_element.find_element_by_xpath('./em').get_attribute('title')
                 
-    #             print obj
+#                 print obj
                 try:
                     row2_element = item.find_element_by_xpath('./p[@class=\'productTitle\']')
                 except:
-                    row2_element = item.find_elements_by_xpath('./div')[1]
+                    row2_element = item.find_elements_by_xpath('./div')[2]
 #                 row2_element = item.find_elements_by_xpath('./div')[1]
                 obj.title = row2_element.find_element_by_xpath('./a').get_attribute('title')
                 obj.title = re.sub('&.*;', '', obj.title)
@@ -73,7 +73,8 @@ def crawl(search_data):
                 
                 list_obj.append(obj)
                 print obj
-            except:
+            except Exception as e:
+                print e
                 pass
             
 #             break
